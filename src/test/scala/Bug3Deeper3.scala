@@ -13,26 +13,20 @@ class Bug3Deeper3 extends AnyWordSpec with Matchers {
 
   private def mirror = universe.runtimeMirror(getClass.getClassLoader)
 
-  private val subjectMethod = classOf[RekognitionClient].getDeclaredMethod(
-    "detectLabels",
-    classOf[DetectLabelsRequest]
-  )
+  private val subjectInterface = classOf[RekognitionClient]
 
   "Scala Reflection - ClassSymbol.info.decls" should {
 
-    def allMethods(method: Method) =
-      mirror
-        .classSymbol(method.getDeclaringClass)
-        .info
-        .decls
+    def allMethods =
+      mirror.classSymbol(subjectInterface).info.decls
 
     "consistently either fail or return a set of methods" in {
       val first = Try {
-        allMethods(subjectMethod)
+        allMethods
       }
 
       val second = Try {
-        allMethods(subjectMethod)
+        allMethods
       }
 
       first shouldBe second

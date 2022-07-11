@@ -4,7 +4,7 @@ import org.scalatest.wordspec.AsyncWordSpec
 class Bug2 extends AsyncWordSpec with BeforeAndAfterEach {
 
   override def beforeEach(): Unit = {
-    throw new Error("some error!")
+    throw new Exception("some error!")
   }
 
   "BeforeAndAfterEach in AsyncWordSpec" should {
