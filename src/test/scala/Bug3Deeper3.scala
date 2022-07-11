@@ -32,6 +32,13 @@ class Bug3Deeper3 extends AnyWordSpec with Matchers {
         allMethods
       }
 
+      // We need to figure why Scala Reflection caches partially extracted symbols
+      // Interesting points to trace and analyze:
+      //
+      // JavaMirrors.scala:791
+      // JavaMirrors.scala:827
+      // TwoWayCaches.scala:34
+
       first shouldBe second
     }
   }
