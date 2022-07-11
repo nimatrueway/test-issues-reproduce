@@ -17,8 +17,11 @@ class Bug3Deeper3 extends AnyWordSpec with Matchers {
 
   "Scala Reflection - ClassSymbol.info.decls" should {
 
-    def allMethods =
-      mirror.classSymbol(subjectInterface).info.decls
+    def allMethods = {
+      val clazzSymbol = mirror.classSymbol(subjectInterface)
+      val clazzInfo = clazzSymbol.info
+      clazzInfo.decls
+    }
 
     "consistently either fail or return a set of methods" in {
       val first = Try {
